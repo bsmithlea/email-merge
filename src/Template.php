@@ -1,8 +1,4 @@
 <?php namespace UToronto\Email\Merge;
-/**
- * Entrada [ http://www.entrada-project.org ]
- *
- */
 use DOMDocument;
 use DOMXpath;
 class Template {
