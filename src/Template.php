@@ -13,13 +13,11 @@ class Template {
 	 */
 	private $_template_data;
 	private $_restore_points = array();
-	private $_tokenNames;
 	
-	function __construct($filename="", array $tokenNames = array()) {
+	function __construct($filename="") {
 		if ($filename) {
 			$this->loadFile($filename);
 		}
-		$this->_tokenNames = $tokenNames;
 	}
 	
 	/**
