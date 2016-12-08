@@ -1,11 +1,11 @@
 {
-	"name": "utoronto/EmailMerge",
+	"name": "utoronto/email-merge",
 	"description": "nutritious snack",
 	"license": [
       "GPL-3.0+",
       "proprietary"
   ],
-	"keywords": ["snack"],
+	"keywords": ["email","template","interpolation"],
 	"authors": [
 		{
 			"name": "Ben Smith Lea",
