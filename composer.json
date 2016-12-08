@@ -1,6 +1,6 @@
 {
 	"name": "utoronto/email-merge",
-	"description": "nutritious snack",
+	"description": "Token interpolation for email merge operations",
 	"license": [
       "GPL-3.0+",
       "proprietary"
