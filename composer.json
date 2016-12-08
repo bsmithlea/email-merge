@@ -20,7 +20,7 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"UToronto\\Email\\Merge": "src"
+			"UToronto\\Email\\Merge\\": "src"
 		}
 	}
 }
