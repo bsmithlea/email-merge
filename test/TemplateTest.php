@@ -7,11 +7,13 @@ use UToronto\Email\Merge\TokenSet;
 
 class TemplateTest extends \PHPUnit_Framework_TestCase
 {
+
     private $allowed = array(
-                        "UTORID",
-                        "EMAIL",
-                        "FULLNAME"
-                );
+            "UTORID",
+            "EMAIL",
+            "FULLNAME"
+    );
+
     function setUp ()
     {
         $tokenSet = new TokenSet($this->allowed);
@@ -19,17 +21,24 @@ class TemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     function testTemplate ()
-    {        
-        $tpl = new Template("Hello %FULLNAME%", "Your id is <strong>%UTORID%</strong>. Repeat, %UTORID%", new TokenSet($this->allowed));
+    {
+        $tpl = new Template("Hello %FULLNAME%", 
+                "Your id is <strong>%UTORID%</strong>. Repeat, %UTORID%", 
+                new TokenSet($this->allowed));
+        $parser = new Parser($tpl);
+        
         $arr = array(
                 "UTORID" => "qq12345",
                 "EMAIL" => "qq12345@example.com",
                 "FULLNAME" => "Walter Winchell"
         );
-        $parser = new Parser($tpl);
+        
         $result = $parser->getResult($arr);
-        var_dump($result);
-        echo json_encode($result);
+        $this->assertEquals("Hello Walter Winchell", $result->getSubject(), 
+                "interpolated subject line");
+        $this->assertEquals(
+                "Your id is <strong>qq12345</strong>. Repeat, qq12345", 
+                $result->getHtmlBody(), "interpolated html body");
     }
 
     static function main ()
