@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<subject>Test Subject</subject>
+<body>
+	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
+	aliquet sem vitae sapien elementum, in vehicula sapien interdum.
+	Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
+	posuere cubilia Curae; Integer purus mi, vehicula et elementum sed,
+	varius nec lectus. Fusce at ligula non elit tristique varius. Sed
+	non nulla a lorem ultricies euismod non id ipsum. Duis sollicitudin,
+	purus vel tempus rhoncus, purus nulla sagittis ante, vitae euismod
+	odio sapien eget arcu. Maecenas feugiat nulla ex. Nulla augue quam,
+	pharetra quis condimentum eget, sollicitudin eu nunc. Nam fermentum
+	erat id ipsum tincidunt, in interdum arcu commodo. Suspendisse
+	potenti. Sed lectus mi, luctus et euismod in, tincidunt nec dui.
+
+	<ol>
+		<li>UTORID: %UTORID%</li>
+		<li>Full name: %FULLNAME%</li>
+		<li>Email: %EMAIL%</li>
+	</ol>
+</body>
