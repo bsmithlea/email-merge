@@ -1,30 +1,37 @@
 <?php
 require_once (dirname(__FILE__) . "/../vendor/autoload.php");
+
 use UToronto\Email\Merge\Template;
-class TemplateTest extends \PHPUnit_Framework_TestCase {
-    
-    function testTemplate1() {
-        $path = __DIR__.'/Fixtures';
-    
-        $tpl = new Template($path . '/test1.xml');
+use UToronto\Email\Merge\Parser;
+use UToronto\Email\Merge\TokenSet;
+
+class TemplateTest extends \PHPUnit_Framework_TestCase
+{
+    private $allowed = array(
+                        "UTORID",
+                        "EMAIL",
+                        "FULLNAME"
+                );
+    function setUp ()
+    {
+        $tokenSet = new TokenSet($this->allowed);
+        Template::setDefaultTokenSet($tokenSet);
+    }
+
+    function testTemplate ()
+    {        
+        $tpl = new Template("Hello %FULLNAME%", "Your id is <strong>%UTORID%</strong>. Repeat, %UTORID%", new TokenSet($this->allowed));
         $arr = array(
                 "UTORID" => "qq12345",
                 "EMAIL" => "qq12345@example.com",
                 "FULLNAME" => "Walter Winchell"
         );
-        $result = $tpl->getResult($arr, array("lang" => "en"));
+        $parser = new Parser($tpl);
+        $result = $parser->getResult($arr);
         var_dump($result);
+        echo json_encode($result);
     }
-    
-    /**
-     * @expectedException RuntimeException
-     */
-    function testMissingTemplate() {
-        $path = __DIR__.'/Fixtures';
-    
-        $tpl = new Template($path . '/does-not-exist.xml');
-    }
-    
+
     static function main ()
     {
         $suite = new PHPUnit_Framework_TestSuite(__CLASS__);
