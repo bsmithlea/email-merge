@@ -1,6 +1,7 @@
 # email-merge
-PHP component for handling email templates with placeholder tokens. The email templates are assumed to be user-editable. Creating a new template requires declaring the set of allowable placeholder tokens. An exception will be thrown if the token text contains something that looks like a token which is not recognized. 
+PHP component for handling email templates with placeholder tokens. The email templates are assumed to be user-editable. Creating a new template requires declaring the set of allowable placeholder tokens. An exception will be thrown if the template text contains something that looks like a token but which is not expected. 
 
+# Basic usage
 ```php
 // Define allowed token names
 $tokens = new TokenSet(array("USERNAME", "FOO", "BAR"));
@@ -31,4 +32,15 @@ $data = array(
 
 // A Parser instance will return Template objects containing interpolated values
 $result = $parser->getResult($data);
+```
+# Unexpected token
+```php
+// Define allowed token names
+$tokens = new TokenSet(array("USERNAME", "FOO", "BAR"));
+
+// token name not in allowed set
+$subject = "Hello %NOT_A_LEGAL_TOKEN%";
+
+// throws UnrecognizedTokenException
+$tpl = new Template($subject, "", $tokens);
 ```
