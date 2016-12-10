@@ -2,14 +2,31 @@
 PHP component for handling email templates with placeholder tokens. The email templates are assumed to be user-editable. Creating a new template requires declaring the set of allowable placeholder tokens. An exception will be thrown the token text contains something that looks like a token which is not recognized. 
 
 ```php
-$tokens = new TokenSet(array("FOO", "BAR"));
+// Define allowed token names
+$tokens = new TokenSet(array("USERNAME", "FOO", "BAR"));
 
+// Email subject line may contain tokens also
+$subject = "Hello %USERNAME%";
+
+// HTML email body
 $htmlBody = <<<HTML_BODY
-&lt;p&gt;Here is a list of interpolated values
-	&lt;ul&gt;
-	&lt;/ul&gt;
-&lt;/p&gt;	
+<p>Here is a list of interpolated values
+  <ul>
+    <li>Foo: %FOO%</li>
+    <li>Bar: %BAR%</li>
+  </ul>
+</p>	
 HTML_BODY;
 
-$tpl = new Template($html, $tokens);
+// Create a template in which all tokens must be "allowed"
+$tpl = new Template($subject, $htmlBody, $tokens);
+
+$data = array(
+    "USERNAME" => "qq12345",
+    "FOO" => "my foo value",
+    "BAR" => "my bar value"
+);
+
+// return Template object containing interpolated values
+$result = $parser->getResult($data);
 ```
