@@ -21,12 +21,14 @@ HTML_BODY;
 // Create a template in which all tokens must be "allowed"
 $tpl = new Template($subject, $htmlBody, $tokens);
 
+$parser = new Parser($tpl);
+
 $data = array(
     "USERNAME" => "qq12345",
     "FOO" => "my foo value",
     "BAR" => "my bar value"
 );
 
-// return Template object containing interpolated values
+// A Parser instance will return Template objects containing interpolated values
 $result = $parser->getResult($data);
 ```
