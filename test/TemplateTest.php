@@ -9,7 +9,7 @@ class TemplateTest extends \PHPUnit_Framework_TestCase
 {
 
     private $allowed = array(
-            "UTORID",
+            "USER_ID",
             "EMAIL",
             "FULLNAME"
     );
@@ -22,25 +22,35 @@ class TemplateTest extends \PHPUnit_Framework_TestCase
 
     function testTemplate ()
     {
-        $tpl = new Template("Hello %FULLNAME%", 
-                "Your id is <strong>%UTORID%</strong>. Repeat, %UTORID%", 
-                new TokenSet($this->allowed));
-        $parser = new Parser($tpl);
-        
-        $arr = array(
-                "UTORID" => "qq12345",
-                "EMAIL" => "qq12345@example.com",
-                "FULLNAME" => "Walter Winchell"
-        );
-        
-        $result = $parser->getResult($arr);
-        $this->assertEquals("Hello Walter Winchell", $result->getSubject(), 
-                "interpolated subject line");
-        $this->assertEquals(
-                "Your id is <strong>qq12345</strong>. Repeat, qq12345", 
-                $result->getHtmlBody(), "interpolated html body");
+    	$tpl = new Template("Hello %FULLNAME%",
+    			"Your id is <strong>%USER_ID%</strong>. Repeat, %USER_ID%",
+    			new TokenSet($this->allowed));
+    	$parser = new Parser($tpl);
+    
+    	$arr = array(
+    			"USER_ID" => "qq12345",
+    			"EMAIL" => "qq12345@example.com",
+    			"FULLNAME" => "Miles Blundell"
+    	);
+    
+    	$result = $parser->getResult($arr);
+    	$this->assertEquals("Hello Miles Blundell", $result->getSubject(),
+    			"interpolated subject line");
+    	$this->assertEquals(
+    			"Your id is <strong>qq12345</strong>. Repeat, qq12345",
+    			$result->getHtmlBody(), "interpolated html body");
     }
-
+    
+    /**
+     * @expectedException UToronto\Email\Merge\UTorontoEmailMergeException
+     */
+    function testUnrecognizedToken ()
+    {
+    	$tpl = new Template("Hello %FULLNAME%",
+    			"Your id is <strong>%ACCOUNT%</strong>. Repeat, %ACCOUNT%",
+    			new TokenSet($this->allowed));
+    }
+    
     static function main ()
     {
         $suite = new PHPUnit_Framework_TestSuite(__CLASS__);

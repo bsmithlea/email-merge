@@ -71,7 +71,7 @@ class Template
         }
         
         if (count($errors) > 0) {
-            throw new \RuntimeException(
+            throw new UnrecognizedTokenException(
                     "Unrecognized tokens: " + implode(", ", $errors));
         }
     }
