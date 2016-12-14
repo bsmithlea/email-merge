@@ -34,7 +34,7 @@ class Parser
         // first process the keys of arr
         $n_arr = array();
         foreach ($arr as $key => $value) {
-            $n_arr[strtoupper($key)] = $value;
+            $n_arr[strtoupper($key)] =  $value;
         }
         
         return strtr($str, $n_arr);
